@@ -5,23 +5,24 @@ testRouter = APIRouter(prefix="/test/ismail")
 
 
 @testRouter.get("/traffic", tags=["traffic"])
-async def testRout(id: int | None = None, town: str | None = None):
+async def traffic_routing(id: int | None = None, town: str | None = None):
     traffics = database.get_points_traffic()
 
     if id:
         for date in traffics:
-            if date["id"] == id:
-                return date
+            if date.id == id:
+                print(date)
+                return date.to_dict()
 
         raise HTTPException(status_code=404, detail="Item not found")
     elif town:
         towns = []
         for date in traffics:
-            if date["town"] == town:
-                towns.append(date)
+            if date.town == town:
+                towns.append(date.to_dict())
         return towns
 
-    return traffics
+    return [traffic.to_dict() for traffic in traffics]
 
 
 # /api/v1 - документация
