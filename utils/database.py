@@ -6,8 +6,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 db = Database()
-db.bind(provider='postgres', user=os.environ['DATABASE_USER'], password=os.environ['DATABASE_PASS'],
-        host=os.environ['DATABASE_HOST'], database=os.environ['DATABASE_DB'], port=os.environ['DATABASE_PORT'])
+db.bind(provider='postgres', 
+        user=os.environ['DATABASE_USER'], 
+        password=os.environ['DATABASE_PASS'],
+        host=os.environ['DATABASE_HOST'], 
+        database=os.environ['DATABASE_NAME'], 
+        port=os.environ['DATABASE_PORT'])
 
 
 class Person(db.Entity):
