@@ -55,7 +55,6 @@ db.generate_mapping(create_tables=True)
 
 # region CRUD Traffics
 
-
 @db_session
 def register_point_traffic(id: int, town: str,
                            traffic: int, max: int):
