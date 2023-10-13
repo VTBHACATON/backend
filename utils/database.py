@@ -16,6 +16,35 @@ class Traffics(db.Entity):
     max = Required(int)
 
 
+class OpenHours(db.Entity):
+    days = Required(str)
+    hours = Required(str)
+
+
+class OpenHoursIndividual(db.Entity):
+    days = Required(str)
+    hours = Required(str)
+
+
+class Office(db.Entity):
+    salePointName = Required(str)
+    address = Required(str)
+    status = Required(str)
+    openHours = Required(OpenHours)
+    rko = Required(str)
+    openHoursIndividual = Required(OpenHoursIndividual)
+    officeType = Required(str)
+    salePointFormat = Required(str)
+    suoAvailability = Required(str)
+    hasRamp = Required(str)
+    latitude = Required(float)
+    longitude = Required(float)
+    metroStation = Optional(str)
+    distance = Required(int)
+    kep = Required(bool)
+    myBranch = Required(bool)
+
+
 db.bind(provider='postgres',
         user=os.environ['DATABASE_USER'],
         password=os.environ['DATABASE_PASS'],
@@ -25,6 +54,7 @@ db.bind(provider='postgres',
 db.generate_mapping(create_tables=True)
 
 # region CRUD Traffics
+
 
 @db_session
 def register_point_traffic(id: int, town: str,
@@ -66,8 +96,51 @@ def update_point_traffic(id: int, town: str = None,
 
 # endregion
 
+# region CRUD office
+# Создание
 
-register_point_traffic(1, "Moscow", 203, 250)
-register_point_traffic(2, "Saint-Peterburg", 124, 200)
-register_point_traffic(3, "Moscow", 194, 400)
-register_point_traffic(4, "Surgut", 32, 110)
+
+@db_session
+def create_office(sale_point_name, address, status, open_hours, rko,
+                  open_hours_individual, office_type, sale_point_format,
+                  suo_availability, has_ramp, latitude, longitude, metro_station,
+                  distance, kep, my_branch):
+    office = Office(salePointName=sale_point_name, address=address, status=status,
+                    openHours=open_hours, rko=rko,
+                    openHoursIndividual=open_hours_individual, officeType=office_type,
+                    salePointFormat=sale_point_format, suoAvailability=suo_availability,
+                    hasRamp=has_ramp, latitude=latitude, longitude=longitude,
+                    metroStation=metro_station, distance=distance, kep=kep,
+                    myBranch=my_branch)
+
+# Чтение
+
+
+@db_session
+def get_office(id):
+    return Office[id]
+
+# Обновление
+
+
+@db_session
+def update_office(id, sale_point_name=None, address=None, status=None,
+                  open_hours=None, rko=None, open_hours_individual=None,
+                  office_type=None, sale_point_format=None, suo_availability=None,
+                  has_ramp=None, latitude=None, longitude=None, metro_station=None,
+                  distance=None, kep=None, my_branch=None):
+    office = Office[id]
+    if sale_point_name is not None:
+        office.salePointName = sale_point_name
+    if address is not None:
+        office.address = address
+    # и т.д. для остальных полей
+
+# Удаление
+
+
+@db_session
+def delete_office(id):
+    Office[id].delete()
+
+# endregion
