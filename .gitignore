@@ -12,7 +12,8 @@ build/
 develop-eggs/
 dist/
 downloads/
-eggs/
+eggs//api/v1/traffic?id=12345678
+
 .eggs/
 lib/
 lib64/
