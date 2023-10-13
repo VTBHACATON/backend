@@ -10,7 +10,7 @@ db = Database()
 
 
 class Traffics(db.Entity):
-    id = PrimaryKey(int, unique=True, size=64)
+    id = PrimaryKey(int, size=64)
     town = Required(str)
     traffic = Required(int)
     max = Required(int)
@@ -67,3 +67,7 @@ def update_point_traffic(id: int, town: str = None,
 # endregion
 
 
+register_point_traffic(1, "Moscow", 203, 250)
+register_point_traffic(2, "Saint-Peterburg", 124, 200)
+register_point_traffic(3, "Moscow", 194, 400)
+register_point_traffic(4, "Surgut", 32, 110)
