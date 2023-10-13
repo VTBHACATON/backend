@@ -55,6 +55,7 @@ db.generate_mapping(create_tables=True)
 
 # region CRUD Traffics
 
+
 @db_session
 def register_point_traffic(id: int, town: str,
                            traffic: int, max: int):
@@ -96,7 +97,6 @@ def update_point_traffic(id: int, town: str = None,
 # endregion
 
 # region CRUD office
-# Создание
 
 
 @db_session
@@ -112,14 +112,10 @@ def create_office(sale_point_name, address, status, open_hours, rko,
                     metroStation=metro_station, distance=distance, kep=kep,
                     myBranch=my_branch)
 
-# Чтение
-
 
 @db_session
 def get_office(id):
     return Office[id]
-
-# Обновление
 
 
 @db_session
@@ -133,9 +129,34 @@ def update_office(id, sale_point_name=None, address=None, status=None,
         office.salePointName = sale_point_name
     if address is not None:
         office.address = address
-    # и т.д. для остальных полей
-
-# Удаление
+    if status is not None:
+        office.status = status
+    if open_hours is not None:
+        office.openHours = open_hours
+    if rko is not None:
+        office.rko = rko
+    if open_hours_individual is not None:
+        office.openHoursIndividual = open_hours_individual
+    if office_type is not None:
+        office.officeType = office_type
+    if sale_point_format is not None:
+        office.salePointFormat = sale_point_format
+    if suo_availability is not None:
+        office.suoAvailability = suo_availability
+    if has_ramp is not None:
+        office.hasRamp = has_ramp
+    if latitude is not None:
+        office.latitude = latitude
+    if longitude is not None:
+        office.longitude = longitude
+    if metro_station is not None:
+        office.metroStation = metro_station
+    if distance is not None:
+        office.distance = distance
+    if kep is not None:
+        office.kep = kep
+    if my_branch is not None:
+        office.myBranch = my_branch
 
 
 @db_session
