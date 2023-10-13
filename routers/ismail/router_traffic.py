@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from utils import database
 
 testRouter = APIRouter(prefix="/test/ismail")
 
@@ -18,7 +19,7 @@ database = [
 
 @testRouter.get("/traffic", tags=["traffic"])
 async def testRout(id: int | None = None, town: str | None = None):
-
+    traffics = database.
     if id:
         for date in database:
             if date["id"] == id:
