@@ -19,11 +19,13 @@ class Traffics(db.Entity):
 class OpenHours(db.Entity):
     days = Required(str)
     hours = Required(str)
+    office = Set('Office')
 
 
 class OpenHoursIndividual(db.Entity):
     days = Required(str)
     hours = Required(str)
+    office = Set('Office')
 
 
 class Office(db.Entity):
@@ -51,6 +53,7 @@ db.bind(provider='postgres',
         host=os.environ['DATABASE_HOST'],
         database=os.environ['DATABASE_NAME'],
         port=os.environ['DATABASE_PORT'])
+
 db.generate_mapping(create_tables=True)
 
 # region CRUD Traffics
