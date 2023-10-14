@@ -23,15 +23,3 @@ async def traffic_routing(id: int | None = None, town: str | None = None):
         return towns
 
     return [traffic.to_dict() for traffic in traffics]
-
-
-# /api/v1 - документация
-
-# /api/v1/traffic - json файл со всеми отделениями {
-#     "id": 12345678,
-#     "town": "Moscow",
-#     "traffic": 205
-# }
-
-# /api/v1/traffic?id=12345678
-# /api/v1/traffic?town=Moscow
