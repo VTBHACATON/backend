@@ -1,11 +1,6 @@
 from pymongo import MongoClient
+from bson import ObjectId
+import os
+from dotenv import get_key
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
-client = MongoClient('mongodb+srv://root:FNaF1122@npk.waicn9k.mongodb.net/')
-filter = {}
-result = client['vtb']['officces'].find(
-    filter=filter
-)
+client = MongoClient(get_key(".env", "MONGO_CONN"))
