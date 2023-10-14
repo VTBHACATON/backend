@@ -1,5 +1,5 @@
 
-from services.azreil.office import Office
+from backend.services.azreil.office import Office
 
 towns = Office.get_all()
 

@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 from fastapi.responses import HTMLResponse
 import folium
-from services.azreil.map import map_routing
-from services.azreil.office import Office
+from backend.services.azreil.map import map_routing
+from backend.services.azreil.office import Office
 map_routers = APIRouter(prefix="/map")
 
 

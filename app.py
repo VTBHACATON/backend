@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-from routers.azreil import AzreilRouters
-from routers.ismail import IsmailRouters
+from backend.routers.azreil import AzreilRouters
+from backend.routers.ismail import IsmailRouters
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.staticfiles import StaticFiles
 load_dotenv()
 
 origins = [
@@ -22,3 +22,5 @@ app.add_middleware(
 
 app.include_router(AzreilRouters)
 app.include_router(IsmailRouters)
+
+app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")

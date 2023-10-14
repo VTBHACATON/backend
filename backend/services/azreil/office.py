@@ -1,4 +1,4 @@
-import utils.mongo
+import backend.utils.mongo
 import json
 
 
@@ -14,24 +14,24 @@ class Office:
 
     @staticmethod
     def get_all():
-        return Office.converter(list(utils.mongo.client['vtb']['officces'].find({
+        return Office.converter(list(backend.utils.mongo.client['vtb']['officces'].find({
 
         })))
 
     @staticmethod
     def get_by_id(id):
-        return Office.converter(list(utils.mongo.client['vtb']['officces'].find({
-            '_id': utils.mongo.ObjectId(id)
+        return Office.converter(list(backend.utils.mongo.client['vtb']['officces'].find({
+            '_id': backend.utils.mongo.ObjectId(id)
         })))
 
     @staticmethod
     def get_rko():
-        return Office.converter(list(utils.mongo.client['vtb']['officces'].find({
+        return Office.converter(list(backend.utils.mongo.client['vtb']['officces'].find({
             'rko': 'есть РКО'
         })))
 
     @staticmethod
     def get_kep():
-        return Office.converter(list(utils.mongo.client['vtb']['officces'].find({
+        return Office.converter(list(backend.utils.mongo.client['vtb']['officces'].find({
             'kep': True
         })))

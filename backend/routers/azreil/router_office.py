@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from services.azreil.office import Office
+from backend.services.azreil.office import Office
 
 
 office_routers = APIRouter(prefix="/office")
