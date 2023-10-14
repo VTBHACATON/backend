@@ -12,7 +12,7 @@ db = Database()
 
 
 class Traffics(db.Entity):
-    id = PrimaryKey(int, size=64)
+    id = PrimaryKey(str)
     town = Required(str)
     traffic = Required(int)
     max = Required(int)
@@ -48,9 +48,8 @@ db.generate_mapping(create_tables=True)
 
 # region CRUD Traffics
 
-
 @db_session
-def register_point_traffic(id: int, town: str,
+def register_point_traffic(id: str, town: str,
                            traffic: int, max: int):
 
     if not Traffics.exists(id=id):
@@ -63,7 +62,7 @@ def register_point_traffic(id: int, town: str,
 
 
 @db_session
-def get_point_traffic(id: int):
+def get_point_traffic(id: str):
     return Traffics.get(id=id)
 
 
@@ -76,7 +75,7 @@ def get_points_traffic(attribute=None):
 
 
 @db_session
-def update_point_traffic(id: int, town: str = None,
+def update_point_traffic(id: str, town: str = None,
                          traffic: int = None, max: int = None):
 
     user_to_update = Traffics.get(id=id)

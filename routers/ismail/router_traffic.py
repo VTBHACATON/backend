@@ -5,7 +5,7 @@ testRouter = APIRouter(prefix="/test/ismail")
 
 
 @testRouter.get("/traffic", tags=["traffic"])
-async def traffic_routing(id: int | None = None, town: str | None = None):
+async def traffic_routing(id: str | None = None, town: str | None = None):
     traffics = database.get_points_traffic()
 
     if id:

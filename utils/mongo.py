@@ -1,6 +1,5 @@
 from pymongo import MongoClient
 from bson import ObjectId
 import os
-from dotenv import get_key
 
-client = MongoClient(get_key(".env", "MONGO_CONN"))
+client = MongoClient("mongodb+srv://root:FNaF1122@npk.waicn9k.mongodb.net/")
