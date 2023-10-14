@@ -1,3 +1,5 @@
+import json
+from pony.orm import select
 import os
 from pony.orm import *
 from pony import orm
@@ -16,29 +18,17 @@ class Traffics(db.Entity):
     max = Required(int)
 
 
-class OpenHours(db.Entity):
-    days = Required(str)
-    hours = Required(str)
-    office = Set('Office')
-
-
-class OpenHoursIndividual(db.Entity):
-    days = Required(str)
-    hours = Required(str)
-    office = Set('Office')
-
-
-class Office(db.Entity):
+class SalePoint(db.Entity):
     salePointName = Required(str)
     address = Required(str)
     status = Required(str)
-    openHours = Required(OpenHours)
+    openHours = Required(Json)
     rko = Required(str)
-    openHoursIndividual = Required(OpenHoursIndividual)
-    officeType = Required(str)
-    salePointFormat = Required(str)
-    suoAvailability = Required(str)
-    hasRamp = Required(str)
+    openHoursIndividual = Required(Json)
+    officeType = Optional(str)
+    salePointFormat = Optional(str)
+    suoAvailability = Optional(str)
+    hasRamp = Optional(str)
     latitude = Required(float)
     longitude = Required(float)
     metroStation = Optional(str)
@@ -96,74 +86,5 @@ def update_point_traffic(id: int, town: str = None,
         user_to_update.traffic = traffic
     if max:
         user_to_update.max = max
-
-# endregion
-
-# region CRUD office
-
-
-@db_session
-def create_office(sale_point_name, address, status, open_hours, rko,
-                  open_hours_individual, office_type, sale_point_format,
-                  suo_availability, has_ramp, latitude, longitude, metro_station,
-                  distance, kep, my_branch):
-    office = Office(salePointName=sale_point_name, address=address, status=status,
-                    openHours=open_hours, rko=rko,
-                    openHoursIndividual=open_hours_individual, officeType=office_type,
-                    salePointFormat=sale_point_format, suoAvailability=suo_availability,
-                    hasRamp=has_ramp, latitude=latitude, longitude=longitude,
-                    metroStation=metro_station, distance=distance, kep=kep,
-                    myBranch=my_branch)
-
-
-@db_session
-def get_office(id):
-    return Office[id]
-
-
-@db_session
-def update_office(id, sale_point_name=None, address=None, status=None,
-                  open_hours=None, rko=None, open_hours_individual=None,
-                  office_type=None, sale_point_format=None, suo_availability=None,
-                  has_ramp=None, latitude=None, longitude=None, metro_station=None,
-                  distance=None, kep=None, my_branch=None):
-    office = Office[id]
-    if sale_point_name is not None:
-        office.salePointName = sale_point_name
-    if address is not None:
-        office.address = address
-    if status is not None:
-        office.status = status
-    if open_hours is not None:
-        office.openHours = open_hours
-    if rko is not None:
-        office.rko = rko
-    if open_hours_individual is not None:
-        office.openHoursIndividual = open_hours_individual
-    if office_type is not None:
-        office.officeType = office_type
-    if sale_point_format is not None:
-        office.salePointFormat = sale_point_format
-    if suo_availability is not None:
-        office.suoAvailability = suo_availability
-    if has_ramp is not None:
-        office.hasRamp = has_ramp
-    if latitude is not None:
-        office.latitude = latitude
-    if longitude is not None:
-        office.longitude = longitude
-    if metro_station is not None:
-        office.metroStation = metro_station
-    if distance is not None:
-        office.distance = distance
-    if kep is not None:
-        office.kep = kep
-    if my_branch is not None:
-        office.myBranch = my_branch
-
-
-@db_session
-def delete_office(id):
-    Office[id].delete()
 
 # endregion
