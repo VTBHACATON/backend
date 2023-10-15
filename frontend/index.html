@@ -93,8 +93,7 @@
         </footer>
 
         <script>
-            let date = new Date();
-            const dn = getWeekDay(date).toLowerCase();
+            let date = Date.now();
             var kep_ = false;
             var rko_ = false;
             var card = [];
@@ -130,7 +129,7 @@
                     },
                 };
 
-                fetch(url + `?rko=${rko_}&kep=${kep_}&dn=${dn}`, options)
+                fetch(url + `?rko=${rko_}&kep=${kep_}&dn=${date}`, options)
                     .then((response) => response.json())
                     .then((data) => {
                         card = data;
