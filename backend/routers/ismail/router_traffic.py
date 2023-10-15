@@ -14,7 +14,7 @@ async def traffic_routing(id: str | None = None, town: str | None = None):
                 print(date)
                 return date.to_dict()
 
-        raise HTTPException(status_code=404, detail="Id not found")
+        
     elif town:
         towns = []
         for date in traffics:
@@ -44,7 +44,9 @@ async def traffic_rating(id: str | None = None, town: str | None = None):
     sorted_answer = dict(sorted(answer.items(), key=lambda item: item[1]))
 
     if id:
-        return {id: sorted_answer.get(id)}
+        returned_id = {id: sorted_answer.get(id)}
+        if returned_id[id]: return returned_id
+        else: raise HTTPException(status_code=404, detail="Id not found")
 
     if town:
         points = [
