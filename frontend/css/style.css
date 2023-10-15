@@ -31,6 +31,7 @@ body{
     border-radius: 5px;
     font-size: 18px;
     font-weight: 400;
+    background: #f0f0f0;
 }
 
 .buttons{
@@ -57,17 +58,23 @@ body{
 .time h1{
     text-align: center;
     font-size: 22px;
+    padding-top: 10px;
 }
 
 .time{
     background-color: #CCCCCC;
     width: 340px;
-    height: 180px;
+    height: 183px;
     border-radius: 4px;
 }
 
 .time-buttons{
     margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+input {
+    margin-left: 8px;
 }
 
 .form_radio_btn{
