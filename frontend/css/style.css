@@ -56,13 +56,13 @@ body{
 
 .time h1{
     text-align: center;
-    font-size: 12px;
+    font-size: 22px;
 }
 
 .time{
     background-color: #CCCCCC;
     width: 340px;
-    height: 147px;
+    height: 180px;
     border-radius: 4px;
 }
 
