@@ -28,42 +28,7 @@
                     <button class="atms">БАНКОМАТЫ</button>
                 </div>
                 <div class="time">
-                    <h1>ВРЕМЯ РАБОТЫ</h1>
-                    <div class="time-buttons">
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-1"
-                                type="radio"
-                                name="radio"
-                                value="1"
-                                checked
-                            />
-                            <label for="radio-1">Работает сейчас</label>
-                        </div>
-
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-2"
-                                type="radio"
-                                name="radio"
-                                value="2"
-                            />
-                            <label for="radio-2">Работает в выходные</label>
-                        </div>
-
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-3"
-                                type="radio"
-                                name="radio"
-                                value="3"
-                            />
-                            <label for="radio-3">Работает 24 часа</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="time">
-                    <h1>ВРЕМЯ РАБОТЫ</h1>
+                    <h1>Время работы</h1>
                     <div class="time-buttons">
                         <div class="form_radio_btn">
                             <input
@@ -96,116 +61,28 @@
                             <label>Работает 24 часа</label>
                         </div>
                     </div>
-                </div>
-                <div class="time">
-                    <h1>ВРЕМЯ РАБОТЫ</h1>
-                    <div class="time-buttons">
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-1"
-                                type="radio"
-                                name="radio3"
-                                value="1"
-                                checked
-                            />
-                            <label>Работает сейчас</label>
-                        </div>
 
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-2"
-                                type="radio"
-                                name="radio3"
-                                value="2"
-                            />
-                            <label>Работает в выходные</label>
-                        </div>
-
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-3"
-                                type="radio"
-                                name="radio3"
-                                value="3"
-                            />
-                            <label>Работает 24 часа</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="time">
-                    <h1>ВРЕМЯ РАБОТЫ</h1>
-                    <div class="time-buttons">
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-1"
-                                type="radio"
-                                name="radio4"
-                                value="1"
-                                checked
-                            />
-                            <label>Работает сейчас</label>
-                        </div>
-
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-2"
-                                type="radio"
-                                name="radio4"
-                                value="2"
-                            />
-                            <label>Работает в выходные</label>
-                        </div>
-
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-3"
-                                type="radio"
-                                name="radio4"
-                                value="3"
-                            />
-                            <label>Работает 24 часа</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="time">
-                    <h1>ВРЕМЯ РАБОТЫ</h1>
-                    <div class="time-buttons">
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-1"
-                                type="radio"
-                                name="radio5"
-                                value="1"
-                                checked
-                            />
-                            <label>Работает сейчас</label>
-                        </div>
-
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-2"
-                                type="radio"
-                                name="radio5"
-                                value="2"
-                            />
-                            <label>Работает в выходные</label>
-                        </div>
-
-                        <div class="form_radio_btn">
-                            <input
-                                id="radio-3"
-                                type="radio"
-                                name="radio5"
-                                value="3"
-                            />
-                            <label>Работает 24 часа</label>
-                        </div>
-                    </div>
+                    <input type="checkbox" id="rko" /> Для Юр лиц
+                    <input type="checkbox" id="kep" /> Электронная подпись
                 </div>
             </div>
         </div>
-        <div class="map">
-            <iframe src="/api/" frameborder="0"></iframe>
+        <div
+            style="
+                position: absolute;
+                top: 0;
+                left: 400px;
+                border: 0;
+                height: 100%;
+                width: 100%;
+            "
+            class="map"
+        >
+            <iframe
+                style="height: 100%; width: 100%"
+                id="map"
+                src="/docs"
+            ></iframe>
         </div>
         <footer>
             <p><img src="img/green.png" alt="" />Офис работает</p>
@@ -214,5 +91,54 @@
 
             <p><img src="img/gray.png" alt="" />Офис сейчас закрыт</p>
         </footer>
+
+        <script>
+            let date = new Date();
+            const dn = getWeekDay(date).toLowerCase();
+            var kep_ = false;
+            var rko_ = false;
+            var card = [];
+            var lat = 55.718077;
+            var lon = 38.103867;
+            document.getElementById(
+                "map"
+            ).contentWindow.location.href = `/api/v1/map/points?lat=${lat}&lon=${lon}&zoom=10`;
+
+            const rko = document.getElementById("rko");
+            rko.addEventListener("change", (e) => {
+                rko_ = e.srcElement.checked;
+                document.getElementById(
+                    "map"
+                ).contentWindow.location.href = `/api/v1/map/points?lat=${lat}&lon=${lon}&zoom=10&rko=${rko_}&kep=${kep_}`;
+            });
+            const kep = document.getElementById("kep");
+
+            kep.addEventListener("change", (e) => {
+                kep_ = e.srcElement.checked;
+                document.getElementById(
+                    "map"
+                ).contentWindow.location.href = `/api/v1/map/points?lat=${lat}&lon=${lon}&zoom=10&rko=${rko_}&kep=${kep_}`;
+            });
+
+            const get_card = () => {
+                const url = "/api/v1/office/";
+
+                const options = {
+                    method: "GET",
+                    headers: {
+                        Accept: "application/json",
+                    },
+                };
+
+                fetch(url + `?rko=${rko_}&kep=${kep_}&dn=${dn}`, options)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        card = data;
+                    })
+                    .catch((error) => console.error(error));
+            };
+
+            get_card();
+        </script>
     </body>
 </html>
